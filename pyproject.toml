@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bim-query"
+version = "0.1.0"
+description = "Couche requête/sélection read-only sur un ModelSnapshot normalisé : filtrage déclaratif, alias sémantiques, requêtes tabulaires et presets métier. Dépend de bim-core uniquement."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+authors = [
+    { name = "Stanislas Limouzi", email = "stanislas@bimdata.io" },
+]
+keywords = [
+    "bim",
+    "ifc",
+    "query",
+    "filter",
+    "bimdata",
+    "i3f",
+    "model-context-protocol",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Other Audience",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Natural Language :: French",
+]
+dependencies = [
+    # Contrats communs : ModelSnapshot / BimObject / filtres vivent dans bim-core
+    # (résolu via la source Git ci-dessous — bim-core n'est pas publié sur PyPI).
+    # bim-query ne dépend PAS de bimdata-read : le snapshot est produit en amont,
+    # ce package le consomme déjà normalisé (source-agnostique).
+    "bim-core>=0.1.0,<0.2",
+    "pydantic>=2,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.5",
+    "build>=1.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/Slimouzi/bim-query"
+Repository = "https://github.com/Slimouzi/bim-query"
+
+[tool.uv.sources]
+bim-core = { git = "https://github.com/Slimouzi/bim-core.git", tag = "bim-core-v0.1.0" }
+
+[tool.setuptools.packages.find]
+include = ["bim_query*"]
+exclude = ["tests*"]
+
+[tool.ruff]
+# Aligné sur audit-bim-i3f pour que les modules extraits verbatim passent
+# ``ruff format --check`` sans reformatage.
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
