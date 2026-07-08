@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bim-query"
-version = "0.1.1"
+version = "0.1.2"
 description = "Couche requête/sélection read-only sur un ModelSnapshot normalisé : filtrage déclaratif, alias sémantiques, requêtes tabulaires et presets métier. Dépend de bim-core uniquement."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -53,7 +53,7 @@ Homepage = "https://github.com/Slimouzi/bim-query"
 Repository = "https://github.com/Slimouzi/bim-query"
 
 [tool.uv.sources]
-bim-core = { git = "https://github.com/Slimouzi/bim-core.git", tag = "bim-core-v0.1.1" }
+bim-core = { git = "https://github.com/Slimouzi/bim-core.git", tag = "bim-core-v0.1.2" }
 
 [tool.setuptools.packages.find]
 include = ["bim_query*"]
